@@ -1,0 +1,28 @@
+#include <stdio.h>
+
+// Функція для знаходження кількості рівних дільників числа n
+int countDivisors(int n) {
+    int count = 0;
+    
+    // Перебираємо всі числа від 1 до n
+    for (int i = 1; i <= n; i++) {
+        // Перевіряємо, чи є число i дільником числа n
+        if (n % i == 0) {
+            count++;
+        }
+    }
+    
+    return count;
+}
+
+int main() {
+    int n;
+    printf("Введіть натуральне число n: ");
+    scanf("%d", &n);
+    
+    int count = countDivisors(n);
+    
+    printf("Кількість рівних дільників числа %d: %d\n", n, count);
+    
+    return 0;
+}
