@@ -45,3 +45,6 @@ int main() {
     long long count = countNumbers(p);
     
     printf("Кількість чисел із %d розрядів: %lld\n", p, count);
+    
+    return 0;
+}
