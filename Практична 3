@@ -1,0 +1,47 @@
+#include <stdio.h>
+
+// Функція для знаходження кількості чисел із p розрядів
+long long countNumbers(int p) {
+    long long dp[2][10] = {0};  // Масив для зберігання кількості чисел залежно від стану останніх двох цифр
+    int current = 0;
+    int previous = 1;
+    
+    // Ініціалізація динамічного масиву
+    for (int i = 0; i <= 9; i++) {
+        dp[current][i] = 1;
+    }
+    
+    // Обчислення кількості чисел
+    for (int i = 2; i <= p; i++) {
+        for (int j = 0; j <= 9; j++) {
+            dp[current][j] = 0;
+            for (int k = 0; k <= 9; k++) {
+                if (j != k && !(j == 9 && k == 5)) {
+                    dp[current][j] += dp[previous][k];
+                }
+            }
+        }
+        
+        // Перестановка значень між поточним і попереднім масивами
+        int temp = current;
+        current = previous;
+        previous = temp;
+    }
+    
+    // Обчислення суми кількостей чисел для всіх станів останніх двох цифр
+    long long result = 0;
+    for (int i = 0; i <= 9; i++) {
+        result += dp[previous][i];
+    }
+    
+    return result;
+}
+
+int main() {
+    int p;
+    printf("Введіть кількість розрядів (p): ");
+    scanf("%d", &p);
+    
+    long long count = countNumbers(p);
+    
+    printf("Кількість чисел із %d розрядів: %lld\n", p, count);
